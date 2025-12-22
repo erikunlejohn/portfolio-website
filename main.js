@@ -8,6 +8,44 @@ toggle.addEventListener("click", () => {
   toggle.textContent = document.body.classList.contains("dark-body") ? "☀" : "☾";
 });
 
+
+
+// MOBILE NAV TOGGLE
+const navToggle = document.querySelector(".nav-toggle");
+const mobileNav = document.querySelector(".mobile-nav");
+const mobileOverlay = document.querySelector(".mobile-nav-overlay");
+const navClose = document.querySelector(".nav-close");
+const mobileLinks = document.querySelectorAll(".mobile-nav a");
+
+function openMobileNav() {
+  document.body.classList.add("mobile-nav-open");
+}
+
+function closeMobileNav() {
+  document.body.classList.remove("mobile-nav-open");
+}
+
+if (navToggle) {
+  navToggle.addEventListener("click", openMobileNav);
+}
+if (navClose) {
+  navClose.addEventListener("click", closeMobileNav);
+}
+if (mobileOverlay) {
+  mobileOverlay.addEventListener("click", closeMobileNav);
+}
+
+// close when a link is clicked
+mobileLinks.forEach((link) => {
+  link.addEventListener("click", closeMobileNav);
+});
+
+// optional: Esc key closes nav
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") closeMobileNav();
+});
+
+
 /* FEATURED PROJECT TABS */
 const projectTabButtons = document.querySelectorAll(".tab-btn");
 const caseCards = document.querySelectorAll(".case-card");

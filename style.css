@@ -77,6 +77,234 @@ img {
 .nav-links a:hover {
   color: #ffffff;
 }
+/* HAMBURGER BUTTON */
+.nav-toggle {
+  display: none; /* hidden on desktop */
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0.25rem;
+  margin-left: 0.75rem;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  margin: 4px 0;
+  border-radius: 999px;
+  background: #e5e7eb;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+/* MOBILE NAV SIDEBAR & OVERLAY */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 40;
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 260px;
+  max-width: 80%;
+  height: 100vh;
+  background: #0b1120;
+  color: #e5e7eb;
+  box-shadow: -12px 0 40px rgba(15, 23, 42, 0.6);
+  transform: translateX(100%); /* hidden off-screen */
+  transition: transform 0.3s ease;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem 1.5rem 2rem;
+}
+
+.mobile-nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.mobile-logo {
+  font-family: "Poppins", system-ui, sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+}
+
+.nav-close {
+  border: none;
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.mobile-nav a {
+  text-decoration: none;
+  color: #e5e7eb;
+  font-size: 0.95rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.mobile-nav a:last-child {
+  border-bottom: none;
+}
+
+/* OPEN STATE (body gets this class) */
+.mobile-nav-open .mobile-nav {
+  transform: translateX(0); /* slide in */
+}
+
+.mobile-nav-open .mobile-nav-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* animate burger to an "X" when open */
+.nav-toggle svg {
+  stroke: #e5e7eb;
+}
+
+.nav-toggle:hover svg {
+  stroke: #ffffff;
+}
+
+
+
+/* BASE HERO LAYOUT (desktop + general) */
+.hero-grid {
+  display: grid;
+  gap: 3rem;
+  padding: 3.5rem 0 3rem;
+  align-items: center;
+}
+
+/* hero image wrapper – base (desktop) */
+.hero-photo-wrap {
+  max-width: 320px;
+  margin-left: auto;        /* pushes image to the right on desktop */
+  border-radius: 1.5rem;
+  padding: 0.4rem;
+  background: radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.4), transparent 60%);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+.hero-photo-wrap img {
+  display: block;
+  width: 100%;
+  border-radius: 1.25rem;
+}
+
+/* DESKTOP (unchanged) */
+@media (min-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1.4fr 1fr;
+    padding: 4.5rem 0 4rem;
+  }
+}
+
+/* MOBILE / TABLET */
+@media (max-width: 899px) {
+
+  /* stack vertically, center everything */
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.4rem 2.2rem;
+    text-align: center;
+  }
+
+  /* move image above text */
+  .hero-image {
+    order: -1;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* BIG centered circular image */
+  .hero-photo-wrap {
+    width: 260px;
+    height: 260px;
+    max-width: none;
+    margin: 0 auto;
+    border-radius: 50%;
+    overflow: hidden;
+    padding: 0;
+    background: transparent;
+    box-shadow: 0 18px 40px rgba(15, 23, 42, 0.35);
+  }
+
+  .hero-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .hero-text {
+    padding: 0 0.2rem;
+    text-align: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-actions a {
+    text-align: center;
+  }
+}
+
+/* extra small phones – slightly smaller circle */
+@media (max-width: 480px) {
+  .hero-photo-wrap {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* hide theme toggle in the top bar on mobile */
+  #theme-toggle {
+    display: none;
+  }
+
+  /* style the theme toggle inside the sidebar */
+  .theme-toggle-mobile {
+    margin-top: 1.5rem;
+    width: 100%;
+    justify-content: center;
+    border-radius: 999px;
+    border-color: rgba(148, 163, 184, 0.8);
+    color: #e5e7eb;
+  }
+}
+
+
+/* RESPONSIVE BEHAVIOUR */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;          /* hide normal nav on mobile */
+  }
+
+  .nav-toggle {
+    display: inline-flex;   /* show hamburger */
+  }
+}
 
 .icon-btn {
   border-radius: 999px;
@@ -112,12 +340,115 @@ img {
   align-items: center;
 }
 
+/* Desktop layout stays the same */
 @media (min-width: 900px) {
   .hero-grid {
     grid-template-columns: 1.4fr 1fr;
     padding: 4.5rem 0 4rem;
   }
 }
+
+@media (max-width: 899px) {
+
+  /* stack vertically, center everything */
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1.4rem 2.2rem;
+    text-align: center;
+  }
+
+  @media (max-width: 899px) {
+
+  /* FORCE the entire hero container to center */
+  .container.hero-grid {
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* your existing styles */
+  .hero-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3rem 1.25rem 2.2rem;
+    text-align: center;
+  }
+
+  /* bring image above text and COMMAND center */
+  .hero-image {
+    order: -1;
+    margin: 0 auto 1.5rem !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* kill the desktop margin-left override */
+  .hero-photo-wrap {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin: 0 auto !important; /* center block */
+  }
+}
+
+  /* image first */
+  .hero-image {
+    order: -1;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* Bigger circular hero image */
+  .hero-photo-wrap {
+    width: 240px;      /* increased */
+    height: 240px;     /* increased */
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+    background: transparent;
+  }
+
+  .hero-photo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .hero-text {
+    padding: 0 1.4rem;
+    text-align: center;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-actions a {
+    text-align: center;
+  }
+
+  .container {
+    padding: 0 1.4rem;
+  }
+}
+
+/* Extra small phones */
+@media (max-width: 480px) {
+  .hero-photo-wrap {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+
 
 .hero-overline {
   letter-spacing: 0.26em;
@@ -188,8 +519,14 @@ img {
   padding: 0.4rem;
   background: radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.4), transparent 60%);
   box-shadow: var(--shadow-soft);
+  margin-left: 0;
 }
-
+@media (max-width: 768px) {
+  .hero-image {
+    display: flex;
+    justify-content: center;
+  }
+}
 .hero-photo-wrap img {
   border-radius: 1.25rem;
 }
